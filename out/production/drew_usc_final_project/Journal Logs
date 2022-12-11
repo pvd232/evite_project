@@ -1,0 +1,338 @@
+Journal Log 1:
+I completely changed the structure of my code based on the feedback of my peers.
+I made host an extended class of guest. and I made party types an enum instead of their
+own classes. In addition, I made premium quality an interface as well. I have now been working for 6 hours straight. I
+Had a lot of difficulty setting up my User, guest, host hierarchy. I had trouble differentiating the classes.
+In addition, I debated about whether I should have a premium user and host. I decided to make a
+premium user and host which now extend from host and guest. I created the first method, which is creating a user in the system.
+There is some reusability, and the code looks weird, so I am going to try to imporve. In addition, I am going to try get my run function to work and create objects.
+
+
+Journal Log 2:
+After office hours, I had to change the structure of most of my parent classes.
+I have far less instance variables, which makes much sense. IN addition, I now only have one premium class for both hierarchies.
+I plan to add additional methods and information to each class
+later down the rode. I will now begin my run method, which will, hopefully, be  able to create new users (User,Host,Guest, or PremiumUser)
+I was able to create the run method, which now creates users when option 0 is calle on the menu
+After many hours and many errors overcome, I was able to get my run method to work. I made it much more efficient and reusable. Instead of creating new users in the run method,
+I now moved this processing to the Database, which makes more sense because all the other methods that create new objects in memory are also in the database.
+As a result of this, no class besides database will have to create new classes. I think this will be very helpful for future classes, including reader and writer.
+
+
+
+
+Journal Log 3:
+I will try to build the login function. For this, I will have to first create a FileWriterfile, which will write objects to a file.
+I'm back. I have created a fileWriter class, which writed down the users that have been created. This was very difficult, because I had alot of typos in my block of code in the if statements.
+Instead of writing to file characteristics of a host, it was programmed to write it for a guest. This is because I copied and pasted it down, and forgot to change it.
+In addition, I realized many of my toFile methods, were just writing the type and nothing else. I had to go back and fix this as well.
+
+
+Journal Log 4:
+I started working on the file reader. I'll have ot be able to succesfully parse the data on the file
+and match the email of a user to what is in the file to be able to log
+someone into their account. I'm getting many errors, which I can't find the answer for.
+I figured out the problem. I had a sc.nextline() in the reader when when i shouldn't have.
+I also had much difficulty in parsing the data. Again, I had to go back to the tofile methods for all the
+classes and manipulate them so they would match their constructors, seperated by commas. I was able to do this finally.
+I can now read and write files. Also, I can now login to any created account.
+
+
+
+
+                                                       Questions
+
+
+
+6) how to make sure the files aren't empty /
+if they are empty, then write to them first.
+if they're not empty, then read to them then write to them
+
+
+7) ask about how you save data
+initializing it at the beginning
+initializing it at the end
+writing at the end
+
+8) Do you want to add another guest?
+   >no
+
+9) counter/## is not changing
+
+10) How to make sure the file is there?
+if its not there, then create the file
+
+11) Structure of my code
+organization
+evite system
+
+12)
+How do I test to see if the file is empty without creating a
+no such exception error?
+invitations.txt
+
+
+
+13)
+Check fileWriter with her?
+// all parent classes
+
+
+14)
+would I have to create a new file/method for everything that I do
+show all parties
+show all users
+
+15)
+Should I make a new file for guest Lists
+Map<Party, guestList>
+
+16)
+Users knowing which parties they've been invited to
+
+17)
+RSVP list
+
+18)
+how many additional methods should we have
+EX: budget
+discount
+secret santa
+
+
+
+
+                                                     Things to do:
+
+1) make it so that when hosts put in users for thier parties, they are only creating users. not guests or hosts. Therefore they don't use the create an account menu.
+
+2)  made the code alot cleaner for upgrading ones account
+// maybe do this for all of the****
+                // make the code cleaner
+
+1) make sure that no one puts the same email
+2) Have to make use of your username/password
+      - probably to login
+
+3) change name of FileReader
+    -all caps
+
+4) error checking on credit card info
+
+
+
+5) Discount system
+budget system
+watch video / other ideas
+
+
+
+
+having established list of parties for users
+
+Map(emails, List<parties>)
+
+Create instance variable
+list of events people are invited to
+write to a file
+to save data
+
+send invite / rsvp only list of parties
+
+Evite System
+
+
+
+
+Good hw to look at:
+ Rentable
+ A8
+
+
+
+
+
+
+
+
+
+
+
+RegParty,dvd@yahoo.com,letsseeifthisworks,8,0000-12-13,third,Viewing Party,letsseeifthisworks1111,
+RegParty,dvdrisco@usc.edu,j,8,0000-04-05,j,Other,j1111,
+GiftParty,dvdrisco@usc.edu,beb,8,0000-04-02,bye,Birthday,beb1111,
+GiftParty,dvdrisco@usc.edu,no,8,0000-02-03,yes,Halloween,no1111,
+GiftParty,rogerfederer@gmail.com,fab,8,0000-09-04,fuckyou,Wedding,fab1111,
+RegParty,dvdrisco@usc.edu,d,8,0000-03-03,d,Bachelorette Party,d1111,
+GiftParty,rogerfederer@gmail.com,fj,8,0000-06-04,n,Christmas,fj1111,
+RegParty,maryln@usc.edu,thishastowork,8,0002-11-28,Leavery Library 3rd floor,Tea Party,thishastowork1111,
+
+
+
+users,
+Host,dd@gmail.com,DD,DD14,TEXbrandy2424,
+Guest,barry@usc.edu,DBarry,Barry14,Brandytex062,
+Host,ted@usc.edu,Ted,ted14,BTedbundy244,
+Guest,bidenHaris@gmail.com,Biden,bidenbidenbiden,fuckHaris123,
+User,fuckme,
+Host,rogerfederer@gmail.com,Drew,rogerroger,Texbrandy,
+Guest,d,d,d,d,
+Guest,pdriscollmd@yahoo.com,Peter,Barry14,Brandytex062,
+Guest,elvisprofessional@gmail.com,Elvis,TheKing,yomama,
+Host,dvdrisco@usc.edu,drew,fuck,d,
+PremiumUser,dakotadriscoll.edu,Dakota,dak57,Prince,902495843,198,
+Host,dvd@yahoo.com,Drew,dvd,dvd,
+Host,patardriscoll@gmail.com,Peter,patar98,Yogi123!,
+Guest,Ivedoneit@fuckyou.com,fuckyou,fuckyouIdon'tneedthis,fuckkkkkyouuuuuuu,
+PremiumUser,nadal@usc.edu,nadal,nadal4227,novaksucks,934057349759034,543,
+Guest,andrewZhang@uac.edu,Andrew,andyandy4,bidensucks,
+Host,maryln@usc.edu,Maryln,killer,killerblood,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public List<Party> initializeParties(String fileName, Database database) {
+        List<Party> listOfParties = new ArrayList<>();
+        Party oneParty = null;
+        try (FileInputStream fin = new FileInputStream("parties.txt")) {
+            try (Scanner sc = new Scanner(fin)) {
+                //  GiftParty,dvdrisco@usc.edu,beb,8,0000-04-02,bye,Birthday,beb1111,
+                while (sc.hasNextLine()) {
+                    sc.useDelimiter(",");
+                    String line = sc.nextLine();
+                    Scanner ls = new Scanner(line);
+                    String classs = sc.next().strip().trim();
+
+                    /*
+                    String type = ls.next().strip();
+                    String hostEmail = ls.next().strip();
+                    String eventTitle = ls.next();
+                    int guestLimit = ls.nextInt();
+                     String date = ls.next();
+                     int year = Integer.parseInt(date.substring(0, 3));
+                     int month = Integer.parseInt(date.substring(5, 7));
+                     int day = Integer.parseInt(date.substring(8));
+                      String location = ls.next();
+                      String typeOfParty = ls.next();
+                      String id = ls.next().trim();
+                      TypesOfGiftParties typeOfGiftParty = null;
+                        TypesOfRegParties typesOfRegParties = null;
+                     */
+
+
+                    System.out.println(classs);
+                    String type = ls.next().strip(); // Change later
+                    System.out.print("type= " + type);
+
+                    // RegParty,dvd@yahoo.com,letsseeifthisworks,8,0000-12-13,third,Viewing Party,letsseeifthisworks1111,
+                    String hostEmail = ls.next().strip();
+                    System.out.print("email= " + hostEmail);
+                    String eventTitle = ls.next();
+                    System.out.print("title= " + eventTitle);
+                    int guestLimit = ls.nextInt();
+                    System.out.print("guest limit=" + guestLimit);
+                    String date = ls.next();
+                    System.out.print("date = " + date);
+
+                    int year = Integer.parseInt(date.substring(0, 3));
+                    System.out.print("year= " + year);
+                    int month = Integer.parseInt(date.substring(5, 7));
+                    System.out.print("month= " + month);
+                    int day = Integer.parseInt(date.substring(8));
+                    System.out.print("day= " + day);
+
+                    String location = ls.next();
+                    System.out.print("location= " + location);
+                    String typeOfParty = ls.next();
+                    System.out.print("type of party= " + typeOfParty);
+                    String id = ls.next().trim();
+                    System.out.print("id= " + id);
+
+                    TypesOfGiftParties typeOfGiftParty = null;
+                    TypesOfRegParties typesOfRegParties = null;
+
+
+                    if (type.equalsIgnoreCase("GiftParty") || (type.equalsIgnoreCase("PartyWithRequirementsPremium"))) {
+                        TypesOfGiftParties tGP = TypesOfGiftParties.match(typeOfParty);
+
+                        oneParty = database.createGiftParty((Host) database.getUserByEmail(hostEmail), eventTitle, guestLimit, day, month, year, location, tGP, id);
+                    } else {
+                        TypesOfRegParties tGP = TypesOfRegParties.match((typeOfParty));
+                    }
+
+                    if (!sc.hasNext() && !type.equalsIgnoreCase("parties,")) {
+                        //System.out.println("Type: "+type);
+                        boolean party = false;
+                        Host host = ((Host) database.getUserByEmail(hostEmail));
+                        if (type.equalsIgnoreCase("PartyWithRequirementsPremium")) {
+                            //System.out.println("hello my little friend1");
+                            oneParty = database.createPremiumParty(host, eventTitle, guestLimit, day, month, year, location, typeOfGiftParty, id);
+                        } else if (type.equalsIgnoreCase("GiftParty")) {
+                            //System.out.println("hello my little friend2");
+                            oneParty = database.createGiftParty(host, eventTitle, guestLimit, day, month, year, location, typeOfGiftParty, id);
+                        } else {
+                            //System.out.println("hello my little friend3");
+                            oneParty = database.createRegParty(host, eventTitle, guestLimit, day, month, year, location, typesOfRegParties);
+                        }
+                    }
+                    listOfParties.add(oneParty);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found, database will start as empty");
+            return new ArrayList<Party>(); // correct?
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return listOfParties;
+    }
+
+
+
+
+
+
+
+
+
+QuickDif
+copy and past files into the same thing
+tell you if they're the same.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
