@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class User {
     private String email;
 
@@ -16,6 +18,11 @@ public class User {
 
     @Override
     public String toString() {
+        return "User," + email + ",";
+    }
+
+    public String toFileString() {
+
         return "User," + email + ",";
     }
 

@@ -5,10 +5,10 @@ import java.util.Map;
 public class Outline {
 
     // map of all users / parties*
-    private Savior helper;
-    private Database database;
-    private FileWriter FileWriter;
-    private FileReader FileReader;
+    private final Savior helper;
+    private final Database database;
+    private final FileWriter FileWriter;
+    private final FileReader FileReader;
     private User currentUser;
 
 
