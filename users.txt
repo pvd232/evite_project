@@ -1,3 +1,6 @@
 Host,c@c.com,ceter,cvd232,abcde,
+Guest,a,a,a,a,
 Host,p@p.com,peter,d,a,
+Host,ab.com,e,a,a,
 Guest,d@d.com,deter,dvd232,abcd,
+PremiumUser,v@v.vom,a,a,a,3,3,
