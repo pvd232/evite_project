@@ -10,7 +10,7 @@ public class PartyWithRequirements extends Party {
 
     //based on type or something -- registryList...
     private String partyItem;
-    private List<PartyRSVP> partyRSVPList;
+    private List<PartyRSVP> partyRSVPList = new ArrayList();
 
     public PartyWithRequirements(Host host, String eventTitle, int guestLimit, int day, int month, int year, String location, String id, TypesOfGiftParties type) {
         super(host, eventTitle, guestLimit, day, month, year, location, id);

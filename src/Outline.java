@@ -22,13 +22,6 @@ public class Outline {
         currentUser = null;
     }
 
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
-    }
-
-    public User getCurrentUser() {
-        return currentUser;
-    }
 
     // I got this code from Assignment 7 in my AccomplishmentProgram file
     public void run() {
@@ -86,6 +79,7 @@ public class Outline {
                     break;
 
                 case SENDINVITATIONS:
+                    System.out.println("checkIfUserHasParty() = " + checkIfUserHasParty());
                     if (checkIfUserHasParty()) {
                         sendInvitations();
                     } else {
@@ -181,9 +175,12 @@ public class Outline {
         String userName = helper.inputWord("Username: ");
         String password = helper.inputWord("Password: ");
         // user, guest, host, premium guest, premium host
-        if (typeOfAccount.equalsIgnoreCase("Guest")) {
+        if (typeOfAccount.equalsIgnoreCase("guest")) {
+            System.out.println("no");
             currentUser = database.createUser("Guest", email, name, userName, password);
         } else {
+            System.out.println("yes");
+
             currentUser = database.createUser("Host", email, name, userName, password);
         }
         boolean premium = helper.inputYesNo("Do you want to be a premium User for only $10.00 a month? (Extra functions are included): "); // explain what this is
@@ -275,6 +272,8 @@ public class Outline {
     public boolean checkIfUserHasParty() {
         boolean securityCheck = false;
         for (Party parties : database.getAllParties()) {
+            System.out.println("parties.getHost().getEmail() = " + parties.getHost().getEmail());
+            System.out.println("currentUser.getEmail() = " + currentUser.getEmail());
             if (parties.getHost().getEmail().equalsIgnoreCase(currentUser.getEmail())) {
                 securityCheck = true;
             }
@@ -326,21 +325,26 @@ public class Outline {
 
     public void sendRSVPs(Guest guest) {
         List<Party> partiesInvitedTo = database.getUserParties(guest.getEmail());
-        for (Party partyRSVPingTo : partiesInvitedTo) {
-            String RSVPMenu = RSVP.displayRSVP();
-            System.out.println("Will you attend \"" + partyRSVPingTo.getEventTitle() + "\" party?");
-            System.out.println(RSVPMenu);
-            int num = helper.inputInt(">", 1, RSVP.getLastIndex1());
-            RSVP chosenRSVP = RSVP.getTypeOfRSVP(num);
-            partyRSVPingTo.addToRSVPList(guest, chosenRSVP);
+        if (partiesInvitedTo.isEmpty()) {
+            System.out.println("You can not RSVP to any parties because you were not invited to any yet. Please check again soon.");
+        } else {
+            for (Party partyRSVPingTo : partiesInvitedTo) {
+                String RSVPMenu = RSVP.displayRSVP();
+                System.out.println("Will you attend \"" + partyRSVPingTo.getEventTitle() + "\" party?");
+                System.out.println(RSVPMenu);
+                int num = helper.inputInt(">", 1, RSVP.getLastIndex1());
+                RSVP chosenRSVP = RSVP.getTypeOfRSVP(num);
+                partyRSVPingTo.addToRSVPList(guest, chosenRSVP);
 
-            if (partyRSVPingTo instanceof PartyWithRequirements) {
-                PartyWithRequirements partyWithRequirements = (PartyWithRequirements) partyRSVPingTo;
-                String partyItem = helper.inputWord("What " + partyWithRequirements.getPartyItem() + " are you bringing?");
-                PartyRSVP userPartyRSVP = new PartyRSVP(chosenRSVP, partyItem, guest.getEmail(), partyWithRequirements.getId());
-                partyWithRequirements.addToPartyRSVPList(userPartyRSVP);
+                if (partyRSVPingTo instanceof PartyWithRequirements) {
+                    PartyWithRequirements partyWithRequirements = (PartyWithRequirements) partyRSVPingTo;
+                    String partyItem = helper.inputWord("What " + partyWithRequirements.getPartyItem() + " are you bringing?");
+                    PartyRSVP userPartyRSVP = new PartyRSVP(chosenRSVP, partyItem, guest.getEmail(), partyWithRequirements.getId());
+                    partyWithRequirements.addToPartyRSVPList(userPartyRSVP);
+                }
             }
         }
+
     }
 
 

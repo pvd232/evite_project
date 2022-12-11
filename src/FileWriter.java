@@ -109,8 +109,6 @@ public class FileWriter {
                 //System.out.print("made it in");
 
                 for (Party party : database.getAllParties()) {
-                    System.out.println("party.getRSVPList() " + party.getRSVPList());
-
                     if (!(party.getRSVPList().isEmpty())) {
                         List<Guest> RSVPGuests = new ArrayList<>(party.getRSVPList().keySet());
                         List<RSVP> RSVPValues = new ArrayList<>(party.getRSVPList().values());

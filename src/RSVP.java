@@ -44,7 +44,6 @@ public enum RSVP {
                 rsvp = RSVP.values()[i];
             }
         }
-        System.out.print(rsvp);
         return rsvp;
     }
 

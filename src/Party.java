@@ -82,7 +82,6 @@ public abstract class Party {
     }
 
     public void addToGuestList(String guest) {
-        System.out.println("IN Party Class (GuestValue):" + guest);
         guestList.add(guest);
     }
 
@@ -132,7 +131,6 @@ public abstract class Party {
     }
 
     public void addToRSVPList(Guest userInvited, RSVP userRSVP) {
-        System.out.printf("userInvited", userInvited);
         this.RSVPList.put(userInvited, userRSVP);
     }
 
