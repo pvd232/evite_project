@@ -1,159 +1,94 @@
 import java.util.*;
 
 public class Database {
-    private Map<String, User> allUsers;
-    private Map<String, Party> allParties;
-
-
-    // get user by email()
-    // get user by partyId() *need to create
-
+    private final Map<String, User> allUsers;
+    private final Map<String, Party> allParties;
+    private final Map<String, RSVP> allRSVPs;
 
     public Database() {
         allUsers = new HashMap<>();
         allParties = new HashMap<>();
+        allRSVPs = new HashMap<>();
     }
 
-    /*
-    public Map<String,List<String>> getGuestListMap(){
-        return guestListMap;
-    }
-
-    public void setGuestListMap(String partyID, List<String> guestsInvited) {
-        guestListMap.put(partyID,guestsInvited);
-    }
-
-     */
-//$
     public List<User> getAllUsers() {
-        List<User> getAllUsers = new ArrayList<>();
+        List<User> getAllUsers;
         getAllUsers = List.copyOf(allUsers.values());
-
         // I found this online at https://javahungry.blogspot.com/2022/06/collection-to-list.html
         return getAllUsers;
     }
 
     public List<Party> getAllParties() {
-        List<Party> getAllparties = List.copyOf(allParties.values());
-//        System.out.println(getAllParties);
-//        System.out.println(allParties);
-        // I found this online at https://javahungry.blogspot.com/2022/06/collection-to-list.html
-        return getAllparties;
+        return List.copyOf(allParties.values());
     }
 
     public void addNewUser(User u) {
-        //System.out.println("HELLLLLLOOOOOOO3");
         allUsers.put(u.getEmail(), u);
 
     }
 
 
-    public void addNewParty(Party u) {
-//        System.out.println(u.getId());
-//        System.out.println("\n");
-//        System.out.println("Before: (addNewParty) "+allParties.values());
-//        System.out.println("\n");
-        allParties.put(u.getId(), u);
-//        System.out.println("After: (addNewParty) "+allParties.values());
-
-
-        //System.out.print("Sucess4");
+    public void addNewParty(Party newParty) {
+        allParties.put(newParty.getId(), newParty);
     }
 
-    public Party createRegParty(Host host, String eventTitle, int guestLimit, int day, int month, int year, String location, String id, TypesOfRegParties type) {
+    public void createRegParty(Host host, String eventTitle, int guestLimit, int day, int month, int year, String location, String id, TypesOfRegParties type) {
         Party party = new PartyWithoutRequirements(host, eventTitle, guestLimit, day, month, year, location, id, type);
         addNewParty(party);
-//        System.out.println("party47: "+party);
-        return party;
     }
 
-    public Party createRegParty(Host host, String eventTitle, int guestLimit, int day, int month, int year, String location, TypesOfRegParties type) {
-        Party f = new PartyWithoutRequirements(host, eventTitle, guestLimit, day, month, year, location, type);
-        addNewParty(f);
-//        System.out.println("party54: "+f);
-        return f;
+    public void createRegParty(Host host, String eventTitle, int guestLimit, int day, int month, int year, String location, TypesOfRegParties type) {
+        Party newParty = new PartyWithoutRequirements(host, eventTitle, guestLimit, day, month, year, location, type);
+        addNewParty(newParty);
     }
 
 
-    public Party createPartyWithRequirements(String typeOfParty, Host host, String eventTitle, int guestLimit, int day, int month, int year, String location, String id, TypesOfGiftParties type) {
-        Party f = null;
-        if (typeOfParty.equalsIgnoreCase("PartyWithRequirementsPremium")) {
-            f = new PartyWithRequirementsPremium(host, eventTitle, guestLimit, day, month, year, location, id, type);
-        } else {
-            f = new PartyWithRequirements(host, eventTitle, guestLimit, day, month, year, location, id, type);
-        }
-
-        addNewParty(f);
-        return f;
+    public void createPartyWithRequirements(String typeOfParty, Host host, String eventTitle, int guestLimit, int day, int month, int year, String location, String id, TypesOfGiftParties type) {
+        Party newParty;
+        newParty = new PartyWithRequirements(host, eventTitle, guestLimit, day, month, year, location, id, type);
+        addNewParty(newParty);
     }
 
-    public Party createPartyWithRequirements(Host host, String eventTitle, int guestLimit, int day, int month, int year, String location, TypesOfGiftParties type) {
-        Party f = null;
-        if (guestLimit > 10) {
-            f = new PartyWithRequirementsPremium(host, eventTitle, guestLimit, day, month, year, location, type);
-        } else {
-            f = new PartyWithRequirements(host, eventTitle, guestLimit, day, month, year, location, type);
-        }
-
-        addNewParty(f);
-        //System.out.println("party95: "+f);
-        return f;
+    public void createPartyWithRequirements(Host host, String eventTitle, int guestLimit, int day, int month, int year, String location, TypesOfGiftParties type) {
+        PartyWithRequirements newParty = new PartyWithRequirements(host, eventTitle, guestLimit, day, month, year, location, type);
+        addNewParty(newParty);
     }
 
-
-    public User createUser(String email) {
-        User u = new User(email);
-        addNewUser(u);
-        // System.out.print("Premium account sucess");
-        return u;
-    }
 
     public User createUser(String email, String name, String userName, String password, String creditCardNumber, String securityCode) {
-        User u = new PremiumUser(email, name, userName, password, creditCardNumber, securityCode);
-        addNewUser(u);
-        // System.out.print("Premium account sucess");
-        return u;
+        User newUser = new PremiumUser(email, name, userName, password, creditCardNumber, securityCode);
+        addNewUser(newUser);
+
+        return newUser;
     }
 
     public User createUser(String type, String email, String name, String userName, String password) {
-        User u = null;
+        User newUser;
         if (type.equalsIgnoreCase("Guest")) {
-            u = new Guest(email, name, userName, password);
-            addNewUser(u);
+            newUser = new Guest(email, name, userName, password);
+            addNewUser(newUser);
         } else {
-            u = new Host(email, name, userName, password);
-            addNewUser(u);
+            newUser = new Host(email, name, userName, password);
+            addNewUser(newUser);
         }
-        return u;
+        return newUser;
     }
 
     public User getUserByEmail(String email) {
-        boolean found = false;
-        User emailf = null;
-        for (String a : allUsers.keySet()) {
-            //System.out.println(a);
-            // this makes it so that its not case sensitive
-            if (a.equals(email)) {
-                //System.out.print("found user " + a);
-                found = true;
-                emailf = allUsers.get(a);
+        for (String userEmail : allUsers.keySet()) {
+            if (userEmail.equals(email)) {
+                return allUsers.get(userEmail);
             }
         }
-        if (found) {
-            return emailf;
-
-        } else {
-            return null;
-        }
+        return null;
     }
 
     public User authenticateUser(String email, String password) {
-        User userToAuthenticate = null;
-        for (String a : allUsers.keySet()) {
-            if (a.equals(email)) {
-                userToAuthenticate = allUsers.get(a);
-                if (userToAuthenticate instanceof Guest) {
-                    Guest guestUserToAuthenticate = (Guest) userToAuthenticate;
+        User userToAuthenticate;
+        for (String userEmail : allUsers.keySet()) {
+            if (userEmail.equals(email)) {
+                userToAuthenticate = allUsers.get(userEmail);
+                if (userToAuthenticate instanceof Guest guestUserToAuthenticate) {
                     if (
                             guestUserToAuthenticate.checkPassword(password)
                     ) {
@@ -167,15 +102,8 @@ public class Database {
     }
 
     public Party getPartyByID(String id) {
-        System.out.println("id we are looking for: " + id);
         for (String partyId : allParties.keySet()) {
-            System.out.println("partyId: " + partyId);
-
-            // this makes it so that its not case sensitive
             if (partyId.equalsIgnoreCase(id)) {
-                System.out.print("Party id =" + partyId + "String Id " + id);
-                //System.out.print("found user " + a);
-
                 return allParties.get(partyId);
             }
         }
@@ -196,5 +124,14 @@ public class Database {
         return userParties;
     }
 
+    public List<Party> getHostParties(String userEmail) {
+        List<Party> userParties = new ArrayList<>();
+        for (Party party : allParties.values()) {
+            if (party.getHost().getEmail() == userEmail) {
+                userParties.add(party);
+            }
+        }
+        return userParties;
+    }
 }
 

@@ -1,6 +1,4 @@
 public interface Premium {
-    public String additionalCapabilites();
-    
-
+    public void showAdditionalInformation(Database database, String objectId);
 
 }

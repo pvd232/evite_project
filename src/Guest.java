@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class Guest extends User{
+public class Guest extends User {
     //private RSVP rsvp;
     //? this would not be an instance variable then?
 
@@ -24,20 +24,20 @@ public class Guest extends User{
         //System.out.print("Constructor name:" + name);
         //this.rsvp= rsvp;
         //Set this up later*
-        this.userName= userName;
-        this.password= password;
-        this.name= name;
-        invitations= new ArrayList<>();
+        this.userName = userName;
+        this.password = password;
+        this.name = name;
+        invitations = new ArrayList<>();
 
     }
 
     @Override
     public String toString() {
-        return "Guest,"+getEmail()+ ","+name+","+userName+","+password;
+        return "Guest," + getEmail() + "," + name + "," + userName + "," + password;
     }
 
-    public String toFileString(){
-        return "Guest,"+ getEmail()+ ","+name+","+userName+","+password+",";
+    public String toFileString() {
+        return "Guest," + getEmail() + "," + name + "," + userName + "," + password + ",";
     }
 
     public String getName() {
@@ -53,7 +53,7 @@ public class Guest extends User{
     }
 
     public void setInvitations(List<Party> invitations) {
-        this.invitations=invitations;
+        this.invitations = invitations;
     }
 
     public boolean checkPassword(String attempt) {
@@ -98,4 +98,14 @@ public class Guest extends User{
         }
     }
 
+    public void showAdditionalInformation(Database database, String partyId) {
+        Party party = database.getPartyByID(partyId);
+        List<Guest> guestList = (List<Guest>) party.getRSVPList().keySet();
+        List<RSVP> rsvpList = (List<RSVP>) party.getRSVPList().values();
+        System.out.println("Please upgrade to PremiumUser to see the full RSVP list. Below are anonymous RSVPs:");
+
+        for (int i = 0; i < guestList.size(); i++) {
+            System.out.println("RSVP: " + rsvpList.get(i).toString());
+        }
+    }
 }

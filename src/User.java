@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class User {
+public class User implements Premium {
     private String email;
 
 
@@ -26,8 +26,12 @@ public class User {
         return "User," + email + ",";
     }
 
+    @Override
+    public void showAdditionalInformation(Database database, String partyId) {
 
-    // Got this code from A11
+    }
+
+// Got this code from A11
     //Specifically the check and updatePassword code
 }
 

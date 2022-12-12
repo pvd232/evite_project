@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.util.List;
 
-public class PartyWithoutRequirements extends Party {
+public class PartyWithoutRequirements extends Party implements Premium {
     private TypesOfRegParties type;
 
 
@@ -10,28 +10,9 @@ public class PartyWithoutRequirements extends Party {
         this.type = type;
     }
 
-    public PartyWithoutRequirements(Host host, List<String> guestList, String eventTitle, int guestLimit, int day, int month, int year, String location, String id, TypesOfRegParties type) {
-        super(host, guestList, eventTitle, guestLimit, LocalDate.of(year, month, day), location, id);
-        this.type = type;
-    }
-
     public PartyWithoutRequirements(Host host, String eventTitle, int guestLimit, int day, int month, int year, String location, TypesOfRegParties type) {
         super(host, eventTitle, guestLimit, day, month, year, location);
         this.type = type;
-    }
-
-    public PartyWithoutRequirements(Host host, List<String> guestList, String eventTitle, int guestLimit, int day, int month, int year, String location, TypesOfRegParties type) {
-        super(host, guestList, eventTitle, guestLimit, LocalDate.of(year, month, day), location);
-        this.type = type;
-    }
-
-
-    public void setType(TypesOfRegParties type) {
-        this.type = type;
-    }
-
-    public TypesOfRegParties getType() {
-        return type;
     }
 
     @Override
@@ -43,6 +24,10 @@ public class PartyWithoutRequirements extends Party {
         return "RegParty," + getHost().getEmail() + "," + getEventTitle() + "," + getGuestLimit() + "," + getDateOfParty() + "," + getLocation() + "," + getId() + "," + type + ",";
     }
 
+    @Override
+    public void showAdditionalInformation(Database database, String partyId) {
+        System.out.println("Party item for all RSVPs: good attitude");
+    }
 }
 
 

@@ -18,74 +18,38 @@ public class FileReader {
     public void initializeParties(Database database) {
         try (FileInputStream fin = new FileInputStream("parties.txt")) {
             try (Scanner scannedFile = new Scanner(fin)) {
-                //  GiftParty,dvdrisco@usc.edu,beb,8,0000-04-02,bye,Birthday,beb1111,
                 while (scannedFile.hasNext() && scannedFile.hasNextLine()) {
-                    //String testNextLine = sc.nextLine();
-                    //System.out.println("Next line: " + sc.nextLine());
-                    //  GiftParty,dvdrisco@usc.edu,beb,8,0000-04-02,bye,Birthday,beb1111,
-
                     Scanner sc = new Scanner(scannedFile.nextLine());
                     sc.useDelimiter(",");
+
                     String typeOfParty = sc.next().trim().strip();
-//                        System.out.println("Type of party: " + typeOfParty);
                     String hostEmail = sc.next().strip().trim();
                     Host host = ((Host) database.getUserByEmail(hostEmail));
-//                        System.out.println("email= " + hostEmail);
                     String eventTitle = sc.next().strip().trim();
-//                        System.out.println("title= " + eventTitle);
                     int guestLimit = Integer.parseInt(sc.next().strip().trim());
-//                        System.out.println("guest limit=" + guestLimit);
+
                     String date = sc.next().strip().trim();
-//                        System.out.println("date = " + date);
                     int year = Integer.parseInt(date.substring(0, 3));
-//                        System.out.println("year= " + year);
                     int month = Integer.parseInt(date.substring(5, 7));
-//                        System.out.println("month= " + month);
                     int day = Integer.parseInt(date.substring(8));
-//                        System.out.println("day= " + day);
+
                     String location = sc.next();
-//                        System.out.println("location= " + location);
                     String id = sc.next().trim().strip();
-//                    System.out.println("id= " + id);
                     TypesOfGiftParties chosenGiftParty = null;
                     TypesOfRegParties chosenRegParties = null;
-
-
                     String specificPartyEnum = sc.next();
-                    // System.out.println("Specific type of party chosen: "+specificPartyEnum);
-
                     if (typeOfParty.equalsIgnoreCase("GiftParty") || (typeOfParty.equalsIgnoreCase("PartyWithRequirementsPremium"))) {
                         chosenGiftParty = TypesOfGiftParties.match(specificPartyEnum);
-                        //System.out.println("ChosenGiftParty in FileReader: "+chosenGiftParty);
-//                            System.out.println("Type of party: " + chosenGiftParty);
                     } else {
                         chosenRegParties = TypesOfRegParties.match(specificPartyEnum);
-                        //  System.out.println("ChosenRegParty in FileReader: "+chosenRegParties);
-//                            System.out.println("Type of party: " + chosenRegParties);
                     }
 
-
-                    //System.out.println("Type: "+type);
-
-                    //System.out.print("Host email: " + hostEmail);
-
-                    //System.out.print(host);
-                    //  System.out.println("Type of party"+typeOfParty);
-
-                    //System.out.print("host= "+ host + "event title= "+eventTitle + "guestLimit= "+guestLimit +"day= "+day +"month= "+month +"year= "+year +"location= "+location +"id= "+id +"Chosen Party= "+specificPartyEnum);
-
                     if (typeOfParty.equalsIgnoreCase("RegParty")) {
-                        //System.out.println("hello my little friend1");
-
                         database.createRegParty(host, eventTitle, guestLimit, day, month, year, location, id, chosenRegParties);
                     } else {
                         database.createPartyWithRequirements(typeOfParty, host, eventTitle, guestLimit, day, month, year, location, id, chosenGiftParty);
-                        //System.out.println("hello my little friend3");
-                        //System.out.println("FileReader:" +eventTitle);
                     }
                 }
-
-
             }
 
         } catch (FileNotFoundException e) {

@@ -8,7 +8,7 @@ import java.util.UUID;
 // I imported this because my unique ID was not working
 // I got this code from ___ website *(do later)
 
-public abstract class Party {
+public abstract class Party implements Premium {
     private Host host;
     private List<String> guestList;
     private String eventTitle;
@@ -136,6 +136,11 @@ public abstract class Party {
 
     public String toFileString() {
         return "";
+    }
+
+    @Override
+    public void showAdditionalInformation(Database database, String partyId) {
+
     }
 }
 

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class PartyWithRequirements extends Party {
+public class PartyWithRequirements extends Party implements Premium {
 
     private TypesOfGiftParties type;
 
@@ -100,6 +100,14 @@ public class PartyWithRequirements extends Party {
 
     public String toFileString() {
         return "GiftParty," + getHost().getEmail() + "," + getEventTitle() + "," + getGuestLimit() + "," + getDateOfParty() + "," + getLocation() + "," + getId() + "," + type + ",";
+    }
+
+    @Override
+    public void showAdditionalInformation(Database database, String partyId) {
+
+        for (PartyRSVP partyRSVP : this.getPartyRSVPList()) {
+            System.out.println("Guest name: " + partyRSVP.getGuestEmail() + " " + "Party item: " + partyRSVP.getPartyItem());
+        }
     }
 }
 

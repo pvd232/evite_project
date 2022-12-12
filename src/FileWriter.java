@@ -42,28 +42,17 @@ public class FileWriter {
     public void saveAllParties(Database database) {
         //writing objects to a file
         PrintWriter out = null;
-        // System.out.println("filename:" +fileName);
         try {
-
             if (database != null) {
-                //System.out.print("database != null");
                 out = new PrintWriter("parties.txt");
-
-                //System.out.print("we got to parties1.txt");
                 int count = 0;
                 for (Party party : database.getAllParties()) {
-                    //System.out.print("Party (in fileWriter): "+party);
-                    //Why does it only add the emails of the user?
                     if (count == database.getAllParties().size() - 1) {
                         out.print(party.toFileString());
                     } else {
                         out.println(party.toFileString());
-                        //System.out.print("Party (in fileWriter): "+party);
                     }
                     count++;
-                    //System.out.print(count);
-                    //System.out.println(party);
-                    //System.out.println(user);
                 }
                 out.close();
 
@@ -76,10 +65,8 @@ public class FileWriter {
     public void saveAllInvitations(Database database) {
         //writing objects to a file
         PrintWriter out = null;
-        // System.out.println("filename:" +fileName);
         try {
             if (database != null) {
-                //System.out.print("database != null");
                 out = new PrintWriter("invitations.txt");
                 for (Party party : database.getAllParties()) {
                     if (!(party.getGuestList().isEmpty())) {
@@ -101,13 +88,9 @@ public class FileWriter {
     public void saveAllRSVPS(Database database) {
         //writing objects to a file
         PrintWriter out = null;
-        // System.out.println("filename:" +fileName);
         try {
             if (database != null) {
-                //System.out.print("database != null");
                 out = new PrintWriter("rsvp.txt");
-                //System.out.print("made it in");
-
                 for (Party party : database.getAllParties()) {
                     if (!(party.getRSVPList().isEmpty())) {
                         List<Guest> RSVPGuests = new ArrayList<>(party.getRSVPList().keySet());
@@ -121,7 +104,6 @@ public class FileWriter {
                     }
 
                 }
-                // is this fine?
             }
             out.close();
 

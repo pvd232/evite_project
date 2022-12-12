@@ -7,6 +7,8 @@ public enum Menu {
     PARTY("Make your own party!"),
     //CREATE_AN_INVITE_CARD("Create an Invitation Card"),
     SENDINVITATIONS("Create Guest List"),
+
+    SEEPARTYITEMS("See Items Being Brought to Your Parties"),
     SEEINVITATIONS("See Your invitations and RSVP Lists for Those Parties"),
     RSVP("RSVP To Parties"),//put all guests as a maybe
 
